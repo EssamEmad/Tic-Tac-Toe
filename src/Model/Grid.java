@@ -70,13 +70,16 @@ public class Grid {
 		//making sure the node can have a node on the left and a node on the right
 		
 		if(x >= 0 && x + 2 < width && node.getY() - 1 >= 0 && node.getY() + 1 < height){
+			int startY = node.getY() - 1;
 			for(int i = 0; i < 3; i ++){
-				Node adjacent = elements[x][i];
+				startY += i;
+				Node adjacent = elements[x][startY];
 				int oppositeX = x+2;
-				int oppositeY = 2* node.getY() - i;
+				int oppositeY = 2* node.getY() - startY;
 				Node opposite = elements[oppositeX][oppositeY];
 				if(isNodeOfPlayer(playerType, adjacent) && isNodeOfPlayer(playerType, opposite))
 					return true;
+				startY -= i;
 				}
 			
 		}
