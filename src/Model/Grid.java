@@ -27,6 +27,7 @@ public class Grid {
 	public synchronized void updateNode(int player, int x, int y){
 		Node node = new Node();
 		node.setPlayer(player);
+		node.setPosition(x,y);
 		elements[x][y] = node;
 	}
 	
@@ -40,13 +41,22 @@ public class Grid {
 			for(int j = 0; j < height; j++){
 				Node current = elements[i][j];
 				if( isNodeOfPlayer(playerType, current)){
-					if (isInMiddleOf2(playerType,current)) return true;
+					if (isInMiddleOf2(playerType,current))
+						return true;
 				}
 			}
 		}
 		return false;
 	}
 	
+	/**
+	 * @param x Has to lie within the correct range
+	 * @param y same as x
+	 * @return the node at this position or null if it doesn't exist
+	 */
+	public synchronized Node getNodeAt(int x, int y){
+		return elements[x][y];
+	}
 	
 	
 	//Helper Methods
@@ -59,8 +69,8 @@ public class Grid {
 		int x = node.getX() -1;
 		//making sure the node can have a node on the left and a node on the right
 		
-		if(x >= 0 && x + 1 < height && node.getY() - 1 >= 0 && node.getY() + 1 < height){
-			for(int i = 0; i < height; i ++){
+		if(x >= 0 && x + 2 < width && node.getY() - 1 >= 0 && node.getY() + 1 < height){
+			for(int i = 0; i < 3; i ++){
 				Node adjacent = elements[x][i];
 				int oppositeX = x+2;
 				int oppositeY = 2* node.getY() - i;
@@ -68,10 +78,13 @@ public class Grid {
 				if(isNodeOfPlayer(playerType, adjacent) && isNodeOfPlayer(playerType, opposite))
 					return true;
 				}
-			Node upperNode = elements[node.getX()][node.getY() +1];
-			Node lowerNode = elements[node.getX()][node.getY() -1];
-			if(isNodeOfPlayer(playerType, upperNode) && isNodeOfPlayer(playerType, lowerNode))
-				return true;
+			
+		}
+		if(node.getY() + 1 < height && node.getY() - 1 >=0){
+		Node upperNode = elements[node.getX()][node.getY() +1];
+		Node lowerNode = elements[node.getX()][node.getY() -1];
+		if(isNodeOfPlayer(playerType, upperNode) && isNodeOfPlayer(playerType, lowerNode))
+			return true;
 		}
 		
 	

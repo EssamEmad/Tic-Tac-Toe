@@ -7,21 +7,8 @@ package Model;
 	 *
 	 */
 	public  class Node{
-		public static final int PLAYER_A = 1;
-		public static final int PLAYER_B = 2;
+
 		
-		
-		/**
-		 * Method: setType
-		 * 
-		 * Sets the type of this node, either X or O.
-		 * 
-		 * @param type the type should be one of the 2 constants in Grid
-		 */
-		public Node setType(int type){
-			this.type = type;
-			return this;
-		}
 		/**
 		 * Method: setType
 		 * 
@@ -40,11 +27,20 @@ package Model;
 			return this;
 		}
 		
+		public int getX(){return xPosition;
+		
+		}
+		public int getY(){
+			return yPosition;}
+		
 		public int getPlayer(){ return player;}
 	
-		
+		@Override
+		public String toString(){
+			return "Player:" + this.getPlayer() + " at postiion" + getX() + " , " + this.getY();
+			
+		}
 		//Instance Variables
-		private int type;
 		private int player;
 		private int xPosition;
 		private int yPosition;
