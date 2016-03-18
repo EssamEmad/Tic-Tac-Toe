@@ -43,4 +43,16 @@ public class TestingModel {
 		else 
 			System.out.println("No");
 	}
+	
+	@Test
+	public void gameTest(){
+		Grid grid = new Grid(6,7);
+		grid.updateNode(Grid.PLAYER_A, 2, 3);
+		grid.updateNode(Grid.PLAYER_B, 3, 2);
+
+		grid.updateNode(Grid.PLAYER_A, 4, 5);
+		grid.updateNode(Grid.PLAYER_A, 2, 5);
+		grid.updateNode(Grid.PLAYER_A, 3, 3);
+
+	}
 }
